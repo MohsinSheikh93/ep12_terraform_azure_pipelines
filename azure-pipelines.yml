@@ -13,8 +13,98 @@ stages:
   - stage: terraform_validate
     displayName: terraform validate and innit
     jobs:
-      - job: 
+      - job:
+        continueOnError: false 
         steps:
         - task: TerraformInstaller@2
+          displayName: Install Terraform
           inputs:
             terraformVersion: 'latest'
+        - task: TerraformCLI@2
+          displayName: Terraform init
+          inputs:
+              command: 'init'
+              commandOptions: '-var-file="dev/main.tfvars"'
+              backendType: 'azurerm'
+              backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
+              ensureBackend: true
+              backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+              backendAzureRmResourceGroupLocation: 'eastus'
+              backendAzureRmStorageAccountName: 'emusaccountdemo1'
+              backendAzureRmStorageAccountSku: 'Standard_LRS'
+              backendAzureRmContainerName: 'tfstate'
+              backendAzureRmKey: 'dev-tfstate'
+              allowTelemetryCollection: false
+        - task: TerraformCLI@2
+          inputs:
+            command: 'validate'
+            commandOptions: '-var-file="dev/main.tfvars"'
+            allowTelemetryCollection: false
+  
+  - stage: terraform_plan
+    dependsOn: terraform_validate
+    condition: succeeded('terraform_validate')
+    displayName: Terraform Plan
+    jobs:
+      - job:
+        steps:
+        - task: TerraformInstaller@2
+          displayName: Install Terraform
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformCLI@0
+          displayName: Terraform init
+          inputs:
+            command: 'init'
+            commandOptions: '-var-file="dev/main.tfvars"' 
+            backendType: 'azurerm'
+            backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
+            ensureBackend: true
+            backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+            backendAzureRmResourceGroupLocation: 'eastus'
+            backendAzureRmStorageAccountName: 'emusaccountdemo1'
+            backendAzureRmStorageAccountSku: 'Standard_LRS'
+            backendAzureRmContainerName: 'tfstate'
+            backendAzureRmKey: 'dev-tfstate'
+            allowTelemetryCollection: false
+                 
+        - task: TerraformCLI@0
+          displayName: Terraform plan
+          inputs:
+            command: 'plan'
+            allowTelemetryCollection: false
+            commandOptions: '-var-file="dev/main.tfvars"'
+            
+  - stage: terraform_apply
+    condition: succeeded('terraform_plan')
+    dependsOn: terraform_plan
+    displayName: Terraform Apply
+    jobs:
+    - job:
+      steps:     
+      - task: TerraformInstaller@0
+        displayName: Install Terraform
+        inputs:
+          terraformVersion: 'latest'
+      - task: TerraformCLI@0
+        displayName: Terraform init
+        inputs:
+          command: 'init'
+          commandOptions: '-var-file="dev/main.tfvars"'   
+          backendType: 'azurerm'
+          backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
+          ensureBackend: true
+          backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+          backendAzureRmResourceGroupLocation: 'eastus'
+          backendAzureRmStorageAccountName: 'emusaccountdemo1'
+          backendAzureRmStorageAccountSku: 'Standard_LRS'
+          backendAzureRmContainerName: 'tfstate'
+          backendAzureRmKey: 'dev-tfstate'
+          allowTelemetryCollection: false
+          
+      - task: TerraformCLI@0
+        displayName: Terraform apply
+        inputs:
+          command: 'apply'
+          commandOptions: '-var-file="dev/main.tfvars"'
+          allowTelemetryCollection: false         
