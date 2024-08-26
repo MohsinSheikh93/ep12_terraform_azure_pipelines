@@ -12,8 +12,3 @@ variable "location" {
   type        = string
   description = "String to specify target region for deployment. Example values eastus or westus"
 }
-
-variable "subscription_id" {
-  type        = string
-  description = "String to specify subscription id"
-}
