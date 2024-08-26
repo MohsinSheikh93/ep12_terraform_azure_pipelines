@@ -38,7 +38,6 @@ stages:
         - task: TerraformCLI@2
           inputs:
             command: 'validate'
-            commandOptions: '-var-file="dev/main.tfvars"'
             allowTelemetryCollection: false
   
   - stage: terraform_plan
