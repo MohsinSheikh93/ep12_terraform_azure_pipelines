@@ -2,7 +2,7 @@
 locals {
   rg_name    = "${var.assetname}-${var.environment}-${var.location}-rg-1"
   res_name   = "${var.assetname}-${var.environment}"
-  sa_name    = "${var.assetname}storageacc0011"
+  sa_name    = "${var.assetname}storageaccdemo0"
 }
 
 resource "random_password" "password" {
