@@ -16,11 +16,11 @@ stages:
       - job:
         continueOnError: false 
         steps:
-        - task: TerraformInstaller@2
+        - task: TerraformInstaller@0
           displayName: Install Terraform
           inputs:
             terraformVersion: 'latest'
-        - task: TerraformCLI@2
+        - task: TerraformCLI@0
           displayName: Terraform init
           inputs:
               command: 'init'
@@ -35,7 +35,7 @@ stages:
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'dev-tfstate'
               allowTelemetryCollection: false
-        - task: TerraformCLI@2
+        - task: TerraformCLI@0
           inputs:
             command: 'validate'
             commandOptions: '-var-file="dev/main.tfvars"'
@@ -48,7 +48,7 @@ stages:
     jobs:
       - job:
         steps:
-        - task: TerraformInstaller@2
+        - task: TerraformInstaller@0
           displayName: Install Terraform
           inputs:
             terraformVersion: 'latest'
