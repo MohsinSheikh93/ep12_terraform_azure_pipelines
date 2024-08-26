@@ -27,9 +27,9 @@ stages:
               backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
               providerAzureRmSubscriptionId: $(ARM_SUBSCRIPTION_ID)
               ensureBackend: true
-              backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+              backendAzureRmResourceGroupName: 'max-dev-eastus-rg-1'
               backendAzureRmResourceGroupLocation: 'eastus'
-              backendAzureRmStorageAccountName: 'emusaccountdemo1'
+              backendAzureRmStorageAccountName: 'maxstorageaccdemo0'
               backendAzureRmStorageAccountSku: 'Standard_LRS'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'dev-tfstate'
@@ -61,9 +61,9 @@ stages:
             backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
             providerAzureRmSubscriptionId: $(ARM_SUBSCRIPTION_ID)
             ensureBackend: true
-            backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+            backendAzureRmResourceGroupName: 'max-dev-eastus-rg-1'
             backendAzureRmResourceGroupLocation: 'eastus'
-            backendAzureRmStorageAccountName: 'emusaccountdemo1'
+            backendAzureRmStorageAccountName: 'maxstorageaccdemo0'
             backendAzureRmStorageAccountSku: 'Standard_LRS'
             backendAzureRmContainerName: 'tfstate'
             backendAzureRmKey: 'dev-tfstate'
@@ -99,9 +99,9 @@ stages:
           backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
           providerAzureRmSubscriptionId: $(ARM_SUBSCRIPTION_ID)
           ensureBackend: true
-          backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
+          backendAzureRmResourceGroupName: 'max-dev-eastus-rg-1'
           backendAzureRmResourceGroupLocation: 'eastus'
-          backendAzureRmStorageAccountName: 'emusaccountdemo1'
+          backendAzureRmStorageAccountName: 'maxstorageaccdemo0'
           backendAzureRmStorageAccountSku: 'Standard_LRS'
           backendAzureRmContainerName: 'tfstate'
           backendAzureRmKey: 'dev-tfstate'
