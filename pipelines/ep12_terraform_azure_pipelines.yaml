@@ -58,6 +58,7 @@ stages:
             commandOptions: '-var-file="dev/main.tfvars"' 
             backendType: 'azurerm'
             backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
+            providerAzureRmSubscriptionId: '3ed8bd5f-d033-4d8c-9264-88905230a957'
             ensureBackend: true
             backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
             backendAzureRmResourceGroupLocation: 'eastus'
@@ -107,4 +108,3 @@ stages:
           command: 'apply'
           commandOptions: '-var-file="dev/main.tfvars"'
           allowTelemetryCollection: false
-                   
