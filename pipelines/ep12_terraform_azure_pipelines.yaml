@@ -9,6 +9,9 @@ pr: none
 pool:
   vmImage: windows-latest
 
+variables:
+  ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+
 stages:
   - stage: terraform_validate
     displayName: terraform validate and innit
@@ -58,7 +61,7 @@ stages:
             commandOptions: '-var-file="dev/main.tfvars"' 
             backendType: 'azurerm'
             backendServiceArm: 'Pay-As-You-Go(3ed8bd5f-d033-4d8c-9264-88905230a957)'
-            providerAzureRmSubscriptionId: '3ed8bd5f-d033-4d8c-9264-88905230a957'
+            providerAzureRmSubscriptionId:  $(ARM_SUBSCRIPTION_ID)
             ensureBackend: true
             backendAzureRmResourceGroupName: 'rg-emu-eastus-1'
             backendAzureRmResourceGroupLocation: 'eastus'
@@ -82,6 +85,7 @@ stages:
     jobs:
     - job:
       steps:     
+      
       - task: TerraformInstaller@2
         displayName: Install Terraform
         inputs:
