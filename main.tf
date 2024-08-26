@@ -223,7 +223,7 @@ resource "azurerm_network_interface" "virtualmachine_1" {
   ip_configuration {
     name                          = "${local.res_name}-1"
     subnet_id                     = azurerm_subnet.subnet_1.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
     public_ip_address_id          = azurerm_public_ip.virtualmachine_1.id
   }
 
@@ -241,7 +241,7 @@ resource "azurerm_public_ip" "virtualmachine_1" {
   name                    = "${local.res_name}-public-vm-nic-1"
   location                = data.azurerm_resource_group.resourcegroup_1.location
   resource_group_name     = data.azurerm_resource_group.resourcegroup_1.name
-  allocation_method       = "Dynamic"
+  allocation_method       = "Static"
   idle_timeout_in_minutes = 10
 }
 
