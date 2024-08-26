@@ -16,11 +16,11 @@ stages:
       - job:
         continueOnError: false 
         steps:
-        - task: TerraformInstaller@0
+        - task: TerraformInstaller@2
           displayName: Install Terraform
           inputs:
             terraformVersion: 'latest'
-        - task: TerraformCLI@0
+        - task: TerraformCLI@2
           displayName: Terraform init
           inputs:
               command: 'init'
@@ -35,7 +35,7 @@ stages:
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'dev-tfstate'
               allowTelemetryCollection: false
-        - task: TerraformCLI@0
+        - task: TerraformCLI@2
           inputs:
             command: 'validate'
             commandOptions: '-var-file="dev/main.tfvars"'
@@ -48,11 +48,11 @@ stages:
     jobs:
       - job:
         steps:
-        - task: TerraformInstaller@0
+        - task: TerraformInstaller@2
           displayName: Install Terraform
           inputs:
             terraformVersion: 'latest'
-        - task: TerraformCLI@0
+        - task: TerraformCLI@2
           displayName: Terraform init
           inputs:
             command: 'init'
@@ -68,7 +68,7 @@ stages:
             backendAzureRmKey: 'dev-tfstate'
             allowTelemetryCollection: false
                  
-        - task: TerraformCLI@0
+        - task: TerraformCLI@2
           displayName: Terraform plan
           inputs:
             command: 'plan'
@@ -82,11 +82,11 @@ stages:
     jobs:
     - job:
       steps:     
-      - task: TerraformInstaller@0
+      - task: TerraformInstaller@2
         displayName: Install Terraform
         inputs:
           terraformVersion: 'latest'
-      - task: TerraformCLI@0
+      - task: TerraformCLI@2
         displayName: Terraform init
         inputs:
           command: 'init'
@@ -102,9 +102,10 @@ stages:
           backendAzureRmKey: 'dev-tfstate'
           allowTelemetryCollection: false
           
-      - task: TerraformCLI@0
+      - task: TerraformCLI@2
         displayName: Terraform apply
         inputs:
           command: 'apply'
           commandOptions: '-var-file="dev/main.tfvars"'
-          allowTelemetryCollection: false         
+          allowTelemetryCollection: false
+                   
